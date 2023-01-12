@@ -1,7 +1,7 @@
 import { apiSlice } from "../../app/api/apiSlice";
 import { cart } from "./cartSlice";
 
-export const cartApiSlice = apiSlice.enhanceEndpoints({ addTagTypes: ["Admin"] }).injectEndpoints({
+export const cartApiSlice:any = apiSlice.enhanceEndpoints({ addTagTypes: ["Admin"] }).injectEndpoints({
 
   endpoints: (builder) => ({
     getCart: builder.query<cart, void>({

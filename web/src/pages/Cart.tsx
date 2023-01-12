@@ -1,17 +1,23 @@
 import  { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../features/auth/authSlice";
 import { useGetCartQuery, useRemoveTocartMutation } from "../features/cart/cartApiSlice";
-import { productitem, selectcartquery, setcartCredentials } from "../features/cart/cartSlice";
+import { productitem, setcartCredentials } from "../features/cart/cartSlice";
 import useFetch from "../features/cart/common";
 import "./cart.css";
 
-const Cart = () => {
+interface Iprops {
+    cart1:any;
+    setcartCredentials:any;
+}
+const Cart:React.FC<Iprops> = ({cart1,setcartCredentials}) => {
 const [rmverror, setRmverror] = useState<string>("")
-  const [msg, errMsg,getMsg] =useFetch()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, errMsg,getMsg] =useFetch()
    const [removeTocart]  =useRemoveTocartMutation()
-   const dispatch = useDispatch()
-      console.log("errorrr",errMsg,rmverror)
+   
+   console.log("errorrr",errMsg,rmverror)
   const {
     data:cart,
     isLoading,
@@ -22,12 +28,11 @@ const [rmverror, setRmverror] = useState<string>("")
 
 
   
-    dispatch(setcartCredentials({...cart}))
+    setcartCredentials({...cart})
    useEffect(()=>{
 
    },[])
   //  const cart = useSelector(selectCart)
-   const cart1 = useSelector(selectcartquery)
    console.log("cartformquery",cart1)
   let URL = "http://localhost:8080"
   const handleAddproduct = ({  productId,
@@ -90,7 +95,7 @@ const handleRemoveitem =async (productId:string)=>{
               </div>
 
               {cart?.items?.map((product: productitem) => (
-                <div className="row border-top border-bottom">
+                <div className="row border-top border-bottom" key={product?.name}>
                   <div className="row main align-items-center">
                     <div className="col-2">
                       <img
@@ -147,4 +152,14 @@ const handleRemoveitem =async (productId:string)=>{
   );
 };
 
-export default Cart;
+const mapStateToProps = (state:RootState)=>{
+  return {
+    cart1:state.api.queries.getCart?.data
+  }
+}
+
+const mapDispatchToProps = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  setcartCredentials
+}
+export default  connect(mapStateToProps, mapDispatchToProps)(Cart);

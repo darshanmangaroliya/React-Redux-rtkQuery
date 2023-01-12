@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useGetCartQuery } from "../features/cart/cartApiSlice";
+import {  productitem } from "../features/cart/cartSlice";
 import useFetch from "../features/cart/common";
 import { Product, useGetProductsQuery } from "../features/product/productApiSlice";
 
@@ -28,7 +29,7 @@ const handleAddproduct = ({  productId,
   } = useGetCartQuery();
 
 
- const productIdArrayOfCart = cart?.items.map((e)=>e.productId)
+ const productIdArrayOfCart = cart?.items.map((e:productitem)=>e.productId)
 
   let URL = "http://localhost:8080"
   let content = <></>;
