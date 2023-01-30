@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { APIURL } from "../config";
 import { useGetCartQuery } from "../features/cart/cartApiSlice";
 import useFetch from "../features/cart/common";
 import { Product, useGetProductsQuery } from "../features/product/productApiSlice";
@@ -30,7 +31,7 @@ const handleAddproduct = ({  productId,
 
  const productIdArrayOfCart = cart?.items.map((e)=>e.productId)
 
-  let URL = "http://localhost:8080"
+  let URL =APIURL
   let content = <></>;
   if (isLoading) {
     content = <p>"Loading..."</p>;

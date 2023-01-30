@@ -1,6 +1,7 @@
 import  { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { APIURL } from "../config";
 import { useGetCartQuery, useRemoveTocartMutation } from "../features/cart/cartApiSlice";
 import { productitem, selectcartquery, setcartCredentials } from "../features/cart/cartSlice";
 import useFetch from "../features/cart/common";
@@ -29,7 +30,7 @@ const [rmverror, setRmverror] = useState<string>("")
   //  const cart = useSelector(selectCart)
    const cart1 = useSelector(selectcartquery)
    console.log("cartformquery",cart1)
-  let URL = "http://localhost:8080"
+  let URL = APIURL
   const handleAddproduct = ({  productId,
     quantity,
   }: {

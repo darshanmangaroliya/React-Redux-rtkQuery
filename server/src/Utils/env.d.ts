@@ -6,5 +6,6 @@ declare namespace NodeJS {
     PORT: Number;
     ACCESS_TOKEN_SECRET: Secret;
     REFRESH_TOKEN_SECRET: Secret;
+    URL:""
   }
 }
